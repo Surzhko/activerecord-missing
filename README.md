@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/Surzhko/activerecord-missing.svg)](https://travis-ci.org/Surzhko/activerecord-missing)
+[![Build Status](https://travis-ci.org/Surzhko/activerecord-missing.svg?branch=master)](https://travis-ci.org/Surzhko/activerecord-missing)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Surzhko/activerecord-missing.svg)](https://gemnasium.com/github.com/Surzhko/activerecord-missing)
-[![Code Climate](https://codeclimate.com/github/Surzhko/activerecord-missing/badges/gpa.svg)](https://codeclimate.com/github/Surzhko/activerecord-missing)
-[![Inline docs](http://inch-ci.org/github/Surzhko/activerecord-missing.svg)](http://inch-ci.org/github/Surzhko/activerecord-missing)
+[![Code Climate](https://codeclimate.com/github/Surzhko/activerecord-missing/badges/gpa.svg?branch=master)](https://codeclimate.com/github/Surzhko/activerecord-missing)
+[![Inline docs](http://inch-ci.org/github/Surzhko/activerecord-missing.svg?branch=master)](http://inch-ci.org/github/Surzhko/activerecord-missing)
 [![security](https://hakiri.io/github/Surzhko/activerecord-missing/master.svg)](https://hakiri.io/github/Surzhko/activerecord-missing/master)
 
 # Active Record Missing
