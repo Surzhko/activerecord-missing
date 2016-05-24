@@ -5,6 +5,7 @@
 [![security](https://hakiri.io/github/Surzhko/activerecord-missing/master.svg)](https://hakiri.io/github/Surzhko/activerecord-missing/master)
 
 # Active Record Missing
+# Active Record Missingsss
 
 ActiveRecord::Missing allows easily find and support missing foreign keys (, unique and some other validations).
 
