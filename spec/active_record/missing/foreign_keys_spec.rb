@@ -3,7 +3,7 @@ require "spec_helper"
 describe ActiveRecord::Missing::ForeignKeys do
   subject { ActiveRecord::Missing::ForeignKeys.call ignore }
 
-  let(:ignore) {
+  let(:ignore) do
     {
       table6: :c1_id,
       table7: [:c1_id, :c2_id],
@@ -11,7 +11,7 @@ describe ActiveRecord::Missing::ForeignKeys do
       "table8" => ["c1_id", "c2_id"],
       "table9" => "all"
     }
-  }
+  end
   let(:connection) { FakeConnection.new data }
 
   before { allow(ActiveRecord::Missing).to receive(:connection).and_return connection }
