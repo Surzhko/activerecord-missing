@@ -8,7 +8,7 @@ module ActiveRecord
       attr_reader :ignore_data
 
       def initialize(ignore_data)
-        @ignore_data = ignore_data.inject({}) do |memo,(k,v)|
+        @ignore_data = ignore_data.inject({}) do |memo, (k, v)|
           memo[k.to_s] = Array(v).map { |a| a.is_a?(String) ? a : a.to_s }
           memo
         end
@@ -43,7 +43,7 @@ module ActiveRecord
       end
 
       def ignore_tables
-        ignore_data.map { |k,v| k if v.include? "all" }.compact
+        ignore_data.map { |k, v| k if v.include? "all" }.compact
       end
 
       def filtered_tables
@@ -55,7 +55,7 @@ module ActiveRecord
       end
 
       def check_missing
-        ignore_data.each do |k,v|
+        ignore_data.each do |k, v|
           raise TableNotFoundError, "Table #{k} not found" unless connection.tables.include?(k)
           connection.columns(k).each do |c|
             unless v.include?("all") || v.include?(c.name)
