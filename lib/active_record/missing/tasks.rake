@@ -4,7 +4,7 @@ namespace :db do
 
   namespace :missing do
     desc "Print missing foreign keys"
-    task :foreign_keys => :environment do
+    task foreign_keys: :environment do
       m_fks = ActiveRecord::Missing::ForeignKeys.call
       keys = 0
       m_fks.each do |table, columns|

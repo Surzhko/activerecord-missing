@@ -210,7 +210,7 @@ Metrics/AbcSize:
                  A calculated magnitude based on number of assignments,
                  branches, and conditions.
   Reference: 'http://c2.com/cgi/wiki?AbcMetric'
-  Enabled: false
+  Enabled: true
   Max: 20
 
 Metrics/BlockNesting:
@@ -387,13 +387,13 @@ Style/AlignArray:
                  Align the elements of an array literal if they span more than
                  one line.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#align-multiline-arrays'
-  Enabled: false
+  Enabled: true
 
 Style/AlignHash:
   Description: >-
                  Align the elements of a hash literal if they span more than
                  one line.
-  Enabled: false
+  Enabled: true
 
 Style/AlignParameters:
   Description: >-
@@ -405,12 +405,12 @@ Style/AlignParameters:
 Style/AndOr:
   Description: 'Use &&/|| instead of and/or.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-and-or-or'
-  Enabled: false
+  Enabled: true
 
 Style/ArrayJoin:
   Description: 'Use Array#join instead of Array#*.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#array-join'
-  Enabled: false
+  Enabled: true
 
 Style/AsciiComments:
   Description: 'Use only ascii symbols in comments.'
@@ -466,7 +466,7 @@ Style/CaseEquality:
 Style/CaseIndentation:
   Description: 'Indentation of when in a case/when/[else/]end.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#indent-when-to-case'
-  Enabled: false
+  Enabled: true
 
 Style/CharacterLiteral:
   Description: 'Checks for uses of character literals.'
@@ -476,11 +476,11 @@ Style/CharacterLiteral:
 Style/ClassAndModuleCamelCase:
   Description: 'Use CamelCase for classes and modules.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#camelcase-classes'
-  Enabled: false
+  Enabled: true
 
 Style/ClassAndModuleChildren:
   Description: 'Checks style of children classes and modules.'
-  Enabled: false
+  Enabled: true
 
 Style/ClassCheck:
   Description: 'Enforces consistent use of `Object#is_a?` or `Object#kind_of?`.'
@@ -498,7 +498,7 @@ Style/ClassVars:
 
 Style/ClosingParenthesisIndentation:
   Description: 'Checks the indentation of hanging closing parentheses.'
-  Enabled: false
+  Enabled: true
 
 Style/CollectionMethods:
   Description: 'Preferred collection methods.'
@@ -514,21 +514,21 @@ Style/CollectionMethods:
 Style/ColonMethodCall:
   Description: 'Do not use :: for method call.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#double-colons'
-  Enabled: false
+  Enabled: true
 
 Style/CommandLiteral:
   Description: 'Use `` or %x around command literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-x'
-  Enabled: false
+  Enabled: true
 
 Style/CommentAnnotation:
   Description: 'Checks formatting of annotation comments.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#annotate-keywords'
-  Enabled: false
+  Enabled: true
 
 Style/CommentIndentation:
   Description: 'Indentation of comments.'
-  Enabled: false
+  Enabled: true
 
 Style/ConstantName:
   Description: 'Constants should use SCREAMING_SNAKE_CASE.'
@@ -538,12 +538,12 @@ Style/ConstantName:
 Style/DefWithParentheses:
   Description: 'Use def with parentheses when there are arguments.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#method-parens'
-  Enabled: false
+  Enabled: true
 
-Style/DeprecatedHashMethods:
-  Description: 'Checks for use of deprecated Hash methods.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-key'
-  Enabled: false
+#Style/DeprecatedHashMethods:
+#  Description: 'Checks for use of deprecated Hash methods.'
+#  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-key'
+#  Enabled: false
 
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
@@ -579,7 +579,7 @@ Style/EmptyLineBetweenDefs:
 
 Style/EmptyLines:
   Description: "Don't use several empty lines in a row."
-  Enabled: false
+  Enabled: true
 
 Style/EmptyLinesAroundAccessModifier:
   Description: "Keep blank lines around access modifiers."
@@ -670,7 +670,7 @@ Style/HashSyntax:
                  Prefer Ruby 1.9 hash syntax { a: 1, b: 2 } over 1.8 syntax
                  { :a => 1, :b => 2 }.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-literals'
-  Enabled: false
+  Enabled: true
 
 Style/IfUnlessModifier:
   Description: >-
@@ -691,7 +691,7 @@ Style/IndentationConsistency:
 Style/IndentationWidth:
   Description: 'Use 2 spaces for indentation.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-indentation'
-  Enabled: false
+  Enabled: true
 
 Style/IndentArray:
   Description: >-
@@ -739,7 +739,7 @@ Style/MethodDefParentheses:
                  Checks if the method definitions have or don't have
                  parentheses.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#method-parens'
-  Enabled: false
+  Enabled: true
 
 Style/MethodName:
   Description: 'Use the configured style when naming methods.'
@@ -961,7 +961,7 @@ Style/SpaceAfterColon:
 Style/SpaceAfterComma:
   Description: 'Use spaces after commas.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
-  Enabled: false
+  Enabled: true
 
 Style/SpaceAroundKeyword:
   Description: 'Use spaces around keywords.'
@@ -1098,7 +1098,7 @@ Style/Tab:
 Style/TrailingBlankLines:
   Description: 'Checks trailing blank lines and final newline.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#newline-eof'
-  Enabled: false
+  Enabled: true
 
 Style/TrailingCommaInArguments:
   Description: 'Checks for trailing comma in parameter lists.'
