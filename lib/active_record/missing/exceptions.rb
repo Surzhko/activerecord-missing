@@ -1,6 +1,7 @@
 module ActiveRecord
   module Missing
-    class TableNotFoundError < StandardError; end
-    class ColumnNotFoundError < StandardError; end
+    class Base < StandardError; end
+    class TableNotFoundError < Base; end
+    class ColumnNotFoundError < Base; end
   end
 end

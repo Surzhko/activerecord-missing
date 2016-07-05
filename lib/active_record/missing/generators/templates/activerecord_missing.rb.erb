@@ -1,0 +1,7 @@
+ActiveRecord::Missing.configure do |config|
+  config.foreign_keys do |fk|
+    #   fk.ignore "users"
+    #   fk.ignore "posts", "all"
+    #   fk.ignore "photos", "user_id", "post_id"
+  end
+end
