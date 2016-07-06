@@ -1,20 +1,24 @@
 require "spec_helper"
 
 describe ActiveRecord::Missing::ForeignKeys do
-  subject { ActiveRecord::Missing::ForeignKeys.call ignore }
+  subject { ActiveRecord::Missing::ForeignKeys.call }
 
-  let(:ignore) {
+  let(:ignore) do
     {
-      table6: :c1_id,
-      table7: [:c1_id, :c2_id],
-      table_deprecated: :all,
+      "table6" => ["c1_id"],
+      "table7" => ["c1_id", "c2_id"],
+      "table_deprecated" => "all",
       "table8" => ["c1_id", "c2_id"],
       "table9" => "all"
     }
-  }
+  end
   let(:connection) { FakeConnection.new data }
+  let(:config_class) { ActiveRecord::Missing::Configurations::ForeignKeys }
 
-  before { allow(ActiveRecord::Missing).to receive(:connection).and_return connection }
+  before do
+    allow(ActiveRecord::Missing).to receive(:connection).and_return connection
+    allow_any_instance_of(config_class).to receive(:ignore_data).and_return(ignore)
+  end
 
   context "when there are missing keys" do
     let(:data) do
@@ -40,20 +44,20 @@ describe ActiveRecord::Missing::ForeignKeys do
           "fk" => %w()
         },
         "table6" => {
-            "columns" => { "c1_id" => :integer },
-            "fk" => %w()
+          "columns" => { "c1_id" => :integer },
+          "fk" => %w()
         },
         "table7" => {
-            "columns" => { "c1_id" => :integer, "c2_id" => :integer },
-            "fk" => %w()
+          "columns" => { "c1_id" => :integer, "c2_id" => :integer },
+          "fk" => %w()
         },
         "table8" => {
-            "columns" => {},
-            "fk" => %w()
+          "columns" => { "c1_id" => :integer, "c2_id" => :integer },
+          "fk" => %w()
         },
         "table9" => {
-            "columns" => { "c1_id" => :integer, "c2_id" => :integer },
-            "fk" => %w()
+          "columns" => { "c1_id" => :integer, "c2_id" => :integer },
+          "fk" => %w()
         },
         "table_deprecated" => {
           "columns" => { "column_id" => :integer },
@@ -72,7 +76,6 @@ describe ActiveRecord::Missing::ForeignKeys do
     it { is_expected.not_to have_key "table_deprecated" }
     it { is_expected.not_to have_key "table6" }
     it { is_expected.not_to have_key "table7" }
-    it { is_expected.not_to have_key "table8" }
     it { is_expected.not_to have_key "table9" }
     it { is_expected.not_to have_key "table5" }
   end
@@ -92,38 +95,57 @@ describe ActiveRecord::Missing::ForeignKeys do
   end
 
   context "when the ignored table not exist in database" do
-    subject { -> { ActiveRecord::Missing::ForeignKeys.call ignore } }
+    subject { -> { ActiveRecord::Missing::ForeignKeys.call } }
 
-    let(:ignore) { { table11: :c1_id } }
+    let(:ignore) { { "table11" => ["c1_id"] } }
     let(:data) do
       {
         "table12" => {
           "columns" => { "c1_id" => :integer },
-          "fk" => %w(column_id)
+          "fk" => %w()
         }
       }
     end
 
+    it { is_expected.to raise_error ActiveRecord::Missing::Base }
+    it { is_expected.to raise_error ActiveRecord::Missing::TableNotFoundError }
+  end
+
+  context "when ignored all table not exist in database" do
+    subject { -> { ActiveRecord::Missing::ForeignKeys.call } }
+
+    let(:ignore) { { "table11" => "all" } }
+    let(:data) do
+      {
+        "table12" => {
+          "columns" => { "id" => :integer, "g1_id" => :integer },
+          "fk" => %w()
+        }
+      }
+    end
+
+    it { is_expected.to raise_error ActiveRecord::Missing::Base }
     it { is_expected.to raise_error ActiveRecord::Missing::TableNotFoundError }
   end
 
   context "when the ignored column not exist in database" do
-    subject { -> { ActiveRecord::Missing::ForeignKeys.call ignore } }
+    subject { -> { ActiveRecord::Missing::ForeignKeys.call } }
 
-    let(:ignore) { { table13: :c1_id, table14: :c2_id } }
+    let(:ignore) { { "table13" => ["c1_id"], "table14" => ["d2_id"] } }
     let(:data) do
       {
         "table13" => {
-          "columns" => { "c1_id" => :integer },
-          "fk" => %w(column_id)
+          "columns" => { "id" => :integer, "c1_id" => :integer },
+          "fk" => %w()
         },
         "table14" => {
-          "columns" => { "c1_id" => :integer },
-          "fk" => %w(column_id)
+          "columns" => { "id" => :integer, "c2_id" => :integer },
+          "fk" => %w()
         }
       }
     end
 
+    it { is_expected.to raise_error ActiveRecord::Missing::Base }
     it { is_expected.to raise_error ActiveRecord::Missing::ColumnNotFoundError }
   end
 end

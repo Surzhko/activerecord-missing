@@ -1,17 +1,11 @@
 module ActiveRecord
   module Missing
     class ForeignKeys
-      def self.call(ignore_data = {})
-        new(ignore_data).call
+      def self.call
+        new.call
       end
 
-      attr_reader :ignore_data
-
-      def initialize(ignore_data)
-        @ignore_data = ignore_data.inject({}) do |memo,(k,v)|
-          memo[k.to_s] = Array(v).map { |a| a.is_a?(String) ? a : a.to_s }
-          memo
-        end
+      def initialize
         check_missing
       end
 
@@ -43,7 +37,7 @@ module ActiveRecord
       end
 
       def ignore_tables
-        ignore_data.map { |k,v| k if v.include? "all" }.compact
+        ignore_data.map { |k, v| k if v == "all" }.compact
       end
 
       def filtered_tables
@@ -54,12 +48,22 @@ module ActiveRecord
         ActiveRecord::Missing.connection
       end
 
+      def config
+        ActiveRecord::Missing.configuration.foreign_keys_config
+      end
+
+      def ignore_data
+        config.ignore_data
+      end
+
       def check_missing
-        ignore_data.each do |k,v|
-          raise TableNotFoundError, "Table #{k} not found" unless connection.tables.include?(k)
-          connection.columns(k).each do |c|
-            unless v.include?("all") || v.include?(c.name)
-              raise ColumnNotFoundError, "Column #{c} in table #{k} not found"
+        ignore_data.each do |table, columns|
+          raise TableNotFoundError, "Table #{table} not found" if connection.tables.exclude?(table)
+          next if columns == "all"
+          columns.each do |c|
+            column_names = connection.columns(table).map(&:name)
+            unless column_names.include?(c)
+              raise ColumnNotFoundError, "Column '#{c}' in table #{table} not found"
             end
           end
         end
